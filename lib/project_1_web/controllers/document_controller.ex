@@ -11,7 +11,7 @@ defmodule Project1Web.DocumentController do
     render(conn, "index.json", documents: documents)
   end
 
-  def create(conn, %{"document" => document_params}) do
+  def create(conn, document_params) do
     with {:ok, %Document{} = document} <- Documents.create_document(document_params) do
       conn
       |> put_status(:created)
