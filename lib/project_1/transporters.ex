@@ -68,6 +68,7 @@ defmodule Project1.Transporters do
 
   """
   def update_transporter(%Transporter{} = transporter, attrs) do
+    IO.inspect(transporter)
     transporter
     |> Transporter.changeset(attrs)
     |> Repo.update()
