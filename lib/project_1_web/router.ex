@@ -16,7 +16,7 @@ defmodule Project1Web.Router do
   end
 
   scope "/", Project1Web do
-    pipe_through :browser
+    pipe_through :api
 
     get "/", PageController, :index
     resources "/vehicles", VehicleController
@@ -26,11 +26,18 @@ defmodule Project1Web.Router do
     resources "/transporter-vehicles", TransporterVehicleController
     resources "/documents", DocumentController
 
+    # forward "/graphiql", Absinthe.Plug.GraphiQL,
+    #     schema: Project1Web.Schema, # GraphQL Schema Module
+    #     interface: :simple,
+    #     context: %{pubsub: CommunityWeb.Endpoint}
+  end
+
+  scope "/" do
     forward "/graphiql", Absinthe.Plug.GraphiQL,
     schema: Project1Web.Schema
 
-    # forward "/", Absinthe.Plug,
-    # schema: Project1Web.Schema
+    forward "/", Absinthe.Plug,
+    schema: Project1Web.Schema
   end
 
   # Other scopes may use custom stacks.
