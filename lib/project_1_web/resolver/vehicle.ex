@@ -5,7 +5,7 @@ defmodule Project1.Resolvers.Vehicle do
   end
 
   def create_vehicle(_parent, %{input: params}, _resolution) do
-    result = Project1.Vehicles.create_vehicle(params)
+    Project1.Vehicles.create_vehicle(params)
     # {:error, "Something went wrong"}
   end
 
