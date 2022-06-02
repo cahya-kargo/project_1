@@ -25,6 +25,12 @@ defmodule Project1Web.Router do
     put "/transporters/status/:id", TransporterController, :update_status
     resources "/transporter-vehicles", TransporterVehicleController
     resources "/documents", DocumentController
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: Project1Web.Schema
+
+    # forward "/", Absinthe.Plug,
+    # schema: Project1Web.Schema
   end
 
   # Other scopes may use custom stacks.

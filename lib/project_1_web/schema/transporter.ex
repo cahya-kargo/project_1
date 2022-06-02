@@ -1,12 +1,10 @@
-defmodule Project1Web.Schema.Transporter do
-  # required to make a module graphQL Schema
-  use Absinthe.Schema
-  # this is the resolver that will be used
-  alias CommunityWeb.NewsResolver
-  query do
-  # this is the query entry point to our app
-  end
-  mutation do
-  # this is the mutation entry point to our app
+defmodule Project1.Schema.Transporter do
+  use Absinthe.Schema.Notation
+
+  object :transporter do
+    field :name, :string
+    field :npwp_number, :string
+    field :phone_number, :string
+    field :status, :string
   end
 end
