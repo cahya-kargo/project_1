@@ -22,7 +22,8 @@ defmodule Project1.Resolvers.Transporter do
     IO.inspect(params[:id])
     transporter = Project1.Transporters.get_transporter!(params[:id])
     Project1.Transporters.update_transporter(transporter, params)
-      # {:error, "Something went wrong"}
+    {:ok, %{success: true}}
+    # {:error, "Something went wrong"}
   end
 
 end

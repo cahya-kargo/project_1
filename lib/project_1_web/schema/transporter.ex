@@ -8,6 +8,10 @@ defmodule Project1.Schema.Transporter do
     field :status, :string
   end
 
+  object :response do
+    field :success, :boolean
+  end
+
   input_object :transporter_input do
     field :name, :string
     field :npwp_number, :string
