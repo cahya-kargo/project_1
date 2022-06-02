@@ -15,7 +15,7 @@ defmodule Project1Web.VehicleView do
       id: vehicle.id,
       vehicle_plate: vehicle.vehicle_plate,
       status: vehicle.status,
-      transporter_id: vehicle.transporter_id
+      transporter: vehicle.transporter
     }
   end
 end

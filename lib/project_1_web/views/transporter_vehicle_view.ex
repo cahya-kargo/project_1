@@ -13,8 +13,6 @@ defmodule Project1Web.TransporterVehicleView do
   def render("transporter_vehicle.json", %{transporter_vehicle: transporter_vehicle}) do
     %{
       id: transporter_vehicle.id,
-      transporter_id: transporter_vehicle.transporter_id,
-      vehicle_id: transporter_vehicle.vehicle_id,
       vehicle: transporter_vehicle.vehicle,
       transporter: transporter_vehicle.transporter
     }

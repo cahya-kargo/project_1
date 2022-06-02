@@ -19,7 +19,18 @@ defmodule Project1.Vehicles do
 
   """
   def list_vehicles do
-    Repo.all(Vehicle)
+    query = Ecto.Query.from v in "vehicles",
+            left_join: t in "transporters",
+            on: v.transporter_id == t.id,
+            select: %{id: v.id, transporter_id: v.transporter_id, vehicle_plate: v.vehicle_plate, status: v.status,
+            transporter: %{
+              id: t.id,
+              name: t.name,
+              phone_number: t.phone_number,
+              npwp_number: t.npwp_number
+            }
+          }
+    Repo.all(query)
   end
 
   @doc """
@@ -36,7 +47,22 @@ defmodule Project1.Vehicles do
       ** (Ecto.NoResultsError)
 
   """
-  def get_vehicle!(id), do: Repo.get!(Vehicle, id)
+  def get_vehicle!(id) do
+    {id, ""} = Integer.parse(id)
+    query = Ecto.Query.from v in "vehicles",
+    left_join: t in "transporters",
+    on: v.transporter_id == t.id,
+    where: v.id == ^id,
+    select: %{id: v.id, transporter_id: v.transporter_id, vehicle_plate: v.vehicle_plate, status: v.status,
+    transporter: %{
+      id: t.id,
+      name: t.name,
+      phone_number: t.phone_number,
+      npwp_number: t.npwp_number
+      }
+    }
+    Repo.one(query)
+  end
 
   @doc """
   Creates a vehicle.

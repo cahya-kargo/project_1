@@ -19,8 +19,8 @@ defmodule Project1.TransporterVehicles do
   """
   def list_transporter_vehicle do
     query = Ecto.Query.from tv in "transporter_vehicles",
-            left_join: v in "vehicles",
-            left_join: t in "transporters",
+            join: v in "vehicles",
+            join: t in "transporters",
             on: tv.transporter_id == t.id,
             on: tv.vehicle_id == v.id,
             select: %{id: tv.id, transporter_id: tv.transporter_id, vehicle_id: tv.vehicle_id, vehicle: %{
@@ -54,7 +54,26 @@ defmodule Project1.TransporterVehicles do
 
   """
   def get_transporter_vehicle!(id) do
-    Repo.get!(TransporterVehicle, id)
+    {id, ""} = Integer.parse(id)
+    query = Ecto.Query.from tv in "transporter_vehicles",
+    join: v in "vehicles",
+    join: t in "transporters",
+    on: tv.transporter_id == t.id,
+    on: tv.vehicle_id == v.id,
+    where: tv.id == ^id,
+    select: %{id: tv.id, transporter_id: tv.transporter_id, vehicle_id: tv.vehicle_id, vehicle: %{
+      id: v.id,
+      vehicle_plate: v.vehicle_plate,
+      status: v.status
+    },
+    transporter: %{
+      id: t.id,
+      name: t.name,
+      phone_number: t.phone_number,
+      npwp_number: t.npwp_number
+      }
+    }
+    Repo.one(query)
   end
 
 
